@@ -17,7 +17,7 @@ cd "$DIR"
 
 echo Platform is $PLATFORM
 
-export ANDROID_HOME=$DIR/android-sdk-$ANDROIDAPI-v$ANDROIDBUILDTOOLSVER
+export ANDROID_HOME=$DIR/android-sdk-$PLATFORM
 export SDK_ROOT=$ANDROID_HOME
 export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
@@ -43,11 +43,6 @@ then
     yes | ./sdkmanager --licenses --sdk_root=$SDK_ROOT
     cd ../../..
 fi
-
-if [ ! -d android-sdk-$PLATFORM ] 
-then
-    curl --location http://dl.google.com/android/android-sdk_r24.4.1-$PLATFORM.$FORMAT | tar -x -z -C .
-fi 
 
 if [ ! -d android-ndk-$ANDROIDNDKVER ]
 then
