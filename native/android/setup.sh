@@ -10,8 +10,7 @@ if [[ "$unamestr" == "Darwin" ]]; then
    NDKPLATFORM='darwin'
 fi
 
-export ANDROIDSDK="${ANDROID_ROOT}/android-sdk-$PLATFORM"
-export ANDROIDNDKVER=r21
+export ANDROIDSDK="${ANDROID_ROOT}/android-sdk-$ANDROIDAPI-$ANDROIDBUILDTOOLSVER"
 export ANDROIDNDK="${ANDROID_ROOT}/android-ndk-$ANDROIDNDKVER"
 
 export ANT_HOME="${ANDROID_ROOT}/apache-ant-$ANT_VERSION"
