@@ -17,7 +17,8 @@ cd "$DIR"
 
 echo Platform is $PLATFORM
 
-export ANDROID_HOME=$DIR/android-sdk-$PLATFORM
+export ANDROID_HOME=$DIR/android-sdk-$ANDROIDAPI-$ANDROIDBUILDTOOLSVER
+export SDK_ROOT=$ANDROID_HOME
 export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
 FORMAT=tgz
@@ -25,12 +26,11 @@ if [[ "$PLATFORM" == "macosx" ]]; then
     FORMAT=zip
 fi
 
-if [ ! -d android-sdk-$ANDROIDAPI-$ANDROIDBUILDTOOLSVER ] 
+if [ ! -d $ANDROID_HOME ] 
 then
     echo "Downloading Android SDK build tools"
-    export SDK_ROOT=$(pwd)/android-sdk-$ANDROIDAPI-$ANDROIDBUILDTOOLSVER
-    mkdir android-sdk-$ANDROIDAPI-$ANDROIDBUILDTOOLSVER
-    cd android-sdk-$ANDROIDAPI-$ANDROIDBUILDTOOLSVER
+    mkdir $ANDROID_HOME
+    cd $ANDROID_HOME
     wget https://dl.google.com/android/repository/commandlinetools-$PLATFORM-7583922_latest.zip
     unzip commandlinetools-$PLATFORM-7583922_latest.zip
     rm commandlinetools-$PLATFORM-7583922_latest.zip
