@@ -37,8 +37,8 @@ class AndroidBuildController(BaseBuildController):
     This class manages Android builds of PyEverywhere projects.
     """
 
-    default_android_sdk = "29"
-    default_android_build_tools = "29.0.2"
+    default_android_sdk = "30"
+    default_android_build_tools = "30.0.3"
     default_arch = 'armeabi-v7a'
     default_requirements = ["openssl","python3","pyjnius","genericndkbuild"]
     android_ndk_version = 'r21'
@@ -65,7 +65,7 @@ class AndroidBuildController(BaseBuildController):
         android_env['ANDROIDAPI'] = android_sdk
         android_env['ANDROIDBUILDTOOLSVER'] = android_build_tools
         android_env['ANDROID_ROOT'] = android_root
-        android_env['ANDROIDSDK'] = "{}/android-sdk-{}".format(android_root, self.get_sdk_platform())
+        android_env['ANDROIDSDK'] = "{}/android-sdk-{}-{}".format(android_root, android_sdk, android_build_tools)
         android_env['ANDROIDNDKVER'] = self.android_ndk_version
         android_env['ANDROIDNDK'] = "{}/android-ndk-{}".format(android_root, self.android_ndk_version)
         android_env['ANT_VERSION'] = self.ant_version

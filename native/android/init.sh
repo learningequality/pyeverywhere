@@ -25,14 +25,27 @@ if [[ "$PLATFORM" == "macosx" ]]; then
     FORMAT=zip
 fi
 
-echo Downloading http://dl.google.com/android/android-sdk_r24.4.1-$PLATFORM.$FORMAT
+if [ ! -d android-sdk-$ANDROIDAPI-$ANDROIDBUILDTOOLSVER ] 
+then
+    echo "Downloading Android SDK build tools"
+    export SDK_ROOT=$(pwd)/android-sdk-$ANDROIDAPI-$ANDROIDBUILDTOOLSVER
+    mkdir android-sdk-$ANDROIDAPI-$ANDROIDBUILDTOOLSVER
+    cd android-sdk-$ANDROIDAPI-$ANDROIDBUILDTOOLSVER
+    wget https://dl.google.com/android/repository/commandlinetools-$PLATFORM-7583922_latest.zip
+    unzip commandlinetools-$PLATFORM-7583922_latest.zip
+    rm commandlinetools-$PLATFORM-7583922_latest.zip
+    cd cmdline-tools/bin
+    yes y | ./sdkmanager "platform-tools" --sdk_root=$SDK_ROOT
+    ./sdkmanager "platforms;android-$ANDROIDAPI" --sdk_root=$SDK_ROOT
+    ./sdkmanager "system-images;android-$ANDROIDAPI;default;x86_64" --sdk_root=$SDK_ROOT
+    ./sdkmanager "build-tools;$ANDROIDBUILDTOOLSVER" --sdk_root=$SDK_ROOT
+    cd ../../..
+fi
 
 if [ ! -d android-sdk-$PLATFORM ] 
 then
     curl --location http://dl.google.com/android/android-sdk_r24.4.1-$PLATFORM.$FORMAT | tar -x -z -C .
 fi 
-
-echo 'y' | android update sdk --no-ui --all --filter platform-tool,android-$ANDROIDAPI,sysimg-$ANDROIDAPI,build-tools-$ANDROIDBUILDTOOLSVER
 
 if [ ! -d android-ndk-$ANDROIDNDKVER ]
 then
