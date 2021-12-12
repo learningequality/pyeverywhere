@@ -39,6 +39,7 @@ then
     yes y | ./sdkmanager "platforms;android-$ANDROIDAPI" --sdk_root=$SDK_ROOT
     yes y | ./sdkmanager "system-images;android-$ANDROIDAPI;default;x86_64" --sdk_root=$SDK_ROOT
     yes y | ./sdkmanager "build-tools;$ANDROIDBUILDTOOLSVER" --sdk_root=$SDK_ROOT
+    echo "Accepting all licenses"
     yes | ./sdkmanager --licenses --sdk_root=$SDK_ROOT
     cd ../../..
 fi
