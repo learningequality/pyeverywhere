@@ -36,9 +36,9 @@ then
     rm commandlinetools-$PLATFORM-7583922_latest.zip
     cd cmdline-tools/bin
     yes y | ./sdkmanager "platform-tools" --sdk_root=$SDK_ROOT
-    ./sdkmanager "platforms;android-$ANDROIDAPI" --sdk_root=$SDK_ROOT
-    ./sdkmanager "system-images;android-$ANDROIDAPI;default;x86_64" --sdk_root=$SDK_ROOT
-    ./sdkmanager "build-tools;$ANDROIDBUILDTOOLSVER" --sdk_root=$SDK_ROOT
+    yes y | ./sdkmanager "platforms;android-$ANDROIDAPI" --sdk_root=$SDK_ROOT
+    yes y | ./sdkmanager "system-images;android-$ANDROIDAPI;default;x86_64" --sdk_root=$SDK_ROOT
+    yes y | ./sdkmanager "build-tools;$ANDROIDBUILDTOOLSVER" --sdk_root=$SDK_ROOT
     cd ../../..
 fi
 
