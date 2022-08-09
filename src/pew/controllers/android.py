@@ -102,6 +102,7 @@ class AndroidBuildController(BaseBuildController):
         minsdk = str(extra_build_options.get("minsdk", ""))
         fileprovider_paths_filename = extra_build_options.get('fileprovider_paths_filename')
         sdk = str(extra_build_options.get("sdk", ""))
+        add_source = str(extra_build_options.get("add-source", ""))
 
         cmd = ['p4a', 'apk',
                 '--window',
@@ -114,6 +115,9 @@ class AndroidBuildController(BaseBuildController):
                 '--arch', self.get_arch(),
                 '--add-source', os.path.join(files_dir, 'org', 'kosoftworks', 'pyeverywhere'),
         ]
+
+        if add_source:
+            cmd.extend("--add-source", os.path.join(src_dir, add_source))
 
         if minsdk:
             cmd.extend(['--minsdk', minsdk])
