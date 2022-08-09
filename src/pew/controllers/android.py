@@ -117,7 +117,7 @@ class AndroidBuildController(BaseBuildController):
         ]
 
         if add_source:
-            cmd.extend("--add-source", os.path.join(src_dir, add_source))
+            cmd.extend(["--add-source", os.path.join(src_dir, add_source)])
 
         if minsdk:
             cmd.extend(['--minsdk', minsdk])
